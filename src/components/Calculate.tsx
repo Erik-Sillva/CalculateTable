@@ -35,7 +35,7 @@ function Calculate() {
         // Atualiza o estado apenas se o valor for um número ou string vazia
         setFormData(prevData => ({
             ...prevData, 
-            [id]: value.replace(/[^0-9]./g,'')
+            [id]: value.replace(/[^0-9.,]/g,'')
         }));
     };
 
