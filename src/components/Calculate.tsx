@@ -27,6 +27,20 @@ function Calculate() {
           purchasePriceRef.current.focus();
         }
       }, []);
+      
+      useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Enter') {
+                handleCalculate(); // Chamar a função ao pressionar Enter
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [formData]); // Adicionar dependências, se necessário
     
     // Função para atualizar os valores dos inputs
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
