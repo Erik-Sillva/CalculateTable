@@ -1,0 +1,37 @@
+/* Para navegadores WebKit, como Chrome, Safari, Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Para Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(../src/assets/Blue\ Gradient\ Technology\ Zoom\ Virtual\ Background.png) no-repeat center;
+  background-size: cover;
+}
+
+.disabled {
+  background: #fff;
+  cursor: text;
+}
