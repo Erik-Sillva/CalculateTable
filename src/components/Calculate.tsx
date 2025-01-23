@@ -57,7 +57,7 @@ function Calculate() {
 
       // Função de validação dos campos obrigatórios
     const validateRequiredFields = () => {
-        const { purchasePrice, counter, wholesale, productCount, freight } = formData;
+        const { purchasePrice, counter, wholesale, productCount } = formData;
         if (!purchasePrice || !counter || !wholesale || !productCount) {
         alert('Por favor, preencha todos os campos obrigatórios: Preço de Compra, % Balcão e % Atacado.');
         return false;
