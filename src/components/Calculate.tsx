@@ -18,7 +18,9 @@ function Calculate() {
         tableThree: '',
         tableFour: '',
         tableFive: '',
-        tableSix: ''
+        tableSix: '',
+        freight: '', // Campo para o frete
+        productCount: '' // campo para a quantidade de produtos
     });
 
     // Efeito para focar automaticamente no campo "Preço de Compra" quando o componente for montado
@@ -55,8 +57,8 @@ function Calculate() {
 
       // Função de validação dos campos obrigatórios
     const validateRequiredFields = () => {
-        const { purchasePrice, counter, wholesale } = formData;
-        if (!purchasePrice || !counter || !wholesale) {
+        const { purchasePrice, counter, wholesale, productCount, freight } = formData;
+        if (!purchasePrice || !counter || !wholesale || !productCount) {
         alert('Por favor, preencha todos os campos obrigatórios: Preço de Compra, % Balcão e % Atacado.');
         return false;
         }
@@ -70,33 +72,42 @@ function Calculate() {
         const {
             purchasePrice,
             counter,
-            wholesale
-        } = formData
+            wholesale,
+            freight,
+            productCount    
+        } = formData;
+
+        const parsedFreight = parseFloat(freight) || 0; // Garantir que o frete seja tratado como número
+        const parsedProductCount = parseFloat(productCount) || 1; // Prevenir divisão por zero
+
+        // Calculando o frete por produto
+        const freightPerProduct = parsedFreight / parsedProductCount;
         
-        // Passo 3: purchasePrice + 10% e setar em tableOne
+        // Passo 2: purchasePrice + 10% e setar em tableOne
         const tableOne = parseFloat(purchasePrice) * 1.10;
 
-        // Passo 4: tableOne * 6% e setar em averagePrice
+        // Passo 3: tableOne * 6% e setar em averagePrice
         const averagePrice = tableOne * 0.06;
 
-        // Passo 5: purchasePrice + averagePrice e setar em costPrice
+        // Passo 4: purchasePrice + averagePrice e setar em costPrice
         const costPrice = parseFloat(purchasePrice) + averagePrice;
 
-        // Passo 6: purchasePrice + counter e setar em tableTwo
-        const tableTwo = parseFloat(purchasePrice) + (parseFloat(purchasePrice) * parseFloat(counter) / 100)
+        // Passo 5: purchasePrice + counter e setar em tableTwo
+        let tableTwoBase = parseFloat(purchasePrice) + freightPerProduct;
+        const tableTwo = tableTwoBase + (tableTwoBase * parseFloat(counter) / 100)
 
-        // Passo 7: tableTwo - 10% e setar em tableThree
+        // Passo 6: tableTwo - 10% e setar em tableThree
         const tableThree = tableTwo * 0.90;
 
-        // Passo 8: tableTwo - 15% e setar em tableFour
+        // Passo 7: tableTwo - 15% e setar em tableFour
         const tableFour = tableTwo * 0.85;
 
-        // Passo 9: costPrice + wholesale e setar em tableFive
-        const tableFive = costPrice + (parseFloat(wholesale) / 100) * costPrice;
+        // Passo 8: costPrice + wholesale e setar em tableFive
+        const costPriceWithFreight = costPrice + freightPerProduct;
+        const tableFive = costPriceWithFreight + (parseFloat(wholesale) / 100) * costPriceWithFreight;
 
-        // Passo 10: Adicionar mais 5% ao wholesale e recalcular
-        const newWholesale = parseFloat(wholesale) + 5;
-        const tableSix = costPrice + (newWholesale / 100) * costPrice;
+        // Passo 9: Adicionar mais 5% ao wholesale e recalcular
+        const tableSix = costPriceWithFreight + ((parseFloat(wholesale) + 5) / 100) * costPriceWithFreight;
 
         // Atualizar o estado com todos os valores calculados
         setFormData(prevData => ({
@@ -159,6 +170,7 @@ function Calculate() {
                     required
                 />
             </div>
+            
 
             <div className="container_wholesale">
                 <label>% Atacado</label>
@@ -166,6 +178,30 @@ function Calculate() {
                     id='wholesale' 
                     className='disabled'
                     value={formData.wholesale}
+                    onChange={handleInputChange}
+                    required
+                />
+            </div>
+
+            <div className="container_freight">
+                <label>Frete</label>
+                <input 
+                    type="number" 
+                    id='freight' 
+                    className='disabled'
+                    value={formData.freight}
+                    onChange={handleInputChange}
+                    required
+                />
+            </div>
+
+            <div className="container_productCount">
+                <label>Volumes</label>
+                <input 
+                    type="number" 
+                    id='productCount' 
+                    className='disabled'
+                    value={formData.productCount}
                     onChange={handleInputChange}
                     required
                 />

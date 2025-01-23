@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const CalculateContainer = styled.div`
-    width: 65vw;
+    width: 90vw;
+    max-width: 1400px;
     height: 55vh;
     border: 2px solid #220A76;
     border-radius: 10px;
