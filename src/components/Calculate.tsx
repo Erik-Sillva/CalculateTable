@@ -20,7 +20,8 @@ function Calculate() {
         tableFive: '',
         tableSix: '',
         freight: '', // Campo para o frete
-        productCount: '' // campo para a quantidade de produtos
+        productCount: '',
+        costPriceWithFreight: '' // campo para a quantidade de produtos
     });
 
     // Efeito para focar automaticamente no campo "Preço de Compra" quando o componente for montado
@@ -93,7 +94,7 @@ function Calculate() {
         const costPrice = parseFloat(purchasePrice) + averagePrice;
 
         // Passo 5: purchasePrice + counter e setar em tableTwo
-        let tableTwoBase = parseFloat(purchasePrice) + freightPerProduct;
+        const tableTwoBase = parseFloat(purchasePrice) + freightPerProduct;
         const tableTwo = tableTwoBase + (tableTwoBase * parseFloat(counter) / 100)
 
         // Passo 6: tableTwo - 10% e setar em tableThree
@@ -115,6 +116,7 @@ function Calculate() {
             tableOne: tableOne.toFixed(2),  // Definir até 2 casas decimais
             averagePrice: averagePrice.toFixed(2),
             costPrice: costPrice.toFixed(2),
+            costPriceWithFreight: costPriceWithFreight.toFixed(2),
             tableTwo: Math.ceil(tableTwo).toFixed(2),
             tableThree: Math.ceil(tableThree).toFixed(2),
             tableFour: Math.ceil(tableFour).toFixed(2),
@@ -139,17 +141,17 @@ function Calculate() {
             </div>
 
             <div className="container_cost_price">
-                <label>Preço de Custo</label>
+                <label>Preço C/ Custo</label>
                 <input type="number" 
                     id='input_cost_price'
                     className='disabled'
-                    value={formData.costPrice} 
+                    value={formData.costPriceWithFreight} 
                     readOnly
                 />
             </div>
 
             <div className="container_average_price">
-                <label>Preço Médio</label>
+                <label>Imp. Saída</label>
                 <input 
                     type="number" 
                     id='input_average_price' 

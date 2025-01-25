@@ -3,7 +3,14 @@ import Calculate from './components/Calculate'
 
 function App() {
   return (
-    <Calculate/>
+    <>
+      <Calculate/>
+      <footer>
+        <p>
+          <a href="https://www.erikdev.tech/" target='_blank'>Erik Silva<sup>©</sup></a>
+        </p>
+      </footer>
+    </>
   )
 }
 
