@@ -85,7 +85,7 @@ function Calculate() {
         const freightPerProduct = parsedFreight / parsedProductCount;
         
         // Passo 2: purchasePrice + 10% e setar em tableOne
-        const tableOne = parseFloat(purchasePrice) * 1.10;
+        const tableOne = parseFloat(purchasePrice) * 1.05;
 
         // Passo 3: tableOne * 6% e setar em averagePrice
         const averagePrice = tableOne * 0.06;
