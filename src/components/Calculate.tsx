@@ -105,10 +105,10 @@ function Calculate() {
 
         // Passo 8: costPrice + wholesale e setar em tableFive
         const costPriceWithFreight = costPrice + freightPerProduct;
-        const tableFive = costPriceWithFreight + (parseFloat(wholesale) / 100) * costPriceWithFreight;
+        const tableFive = costPriceWithFreight * 2;
 
         // Passo 9: Adicionar mais 5% ao wholesale e recalcular
-        const tableSix = costPriceWithFreight + ((parseFloat(wholesale) + 5) / 100) * costPriceWithFreight;
+        const tableSix = tableFive * 0.90;
 
         // Atualizar o estado com todos os valores calculados
         setFormData(prevData => ({
