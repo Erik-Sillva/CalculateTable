@@ -73,7 +73,6 @@ function Calculate() {
         const {
             purchasePrice,
             counter,
-            wholesale,
             freight,
             productCount    
         } = formData;
