@@ -83,7 +83,7 @@ function Calculate() {
         // Calculando o frete por produto
         const freightPerProduct = parsedFreight / parsedProductCount;
         
-        // Passo 2: purchasePrice + 10% e setar em tableOne
+        // Passo 2: purchasePrice + 5% e setar em tableOne
         const tableOne = parseFloat(purchasePrice) * 1.05;
 
         // Passo 3: tableOne * 6% e setar em averagePrice
@@ -102,26 +102,26 @@ function Calculate() {
         // Passo 7: tableTwo - 15% e setar em tableFour
         const tableFour = tableTwo * 0.85;
 
-        // Passo 8: costPrice + wholesale e setar em tableFive
+        // Passo 8: tableTwo * 2 e setar em tableFive
         const costPriceWithFreight = costPrice + freightPerProduct;
-        const tableFive = costPriceWithFreight * 2;
+        const tableFive = Math.ceil(parseFloat(purchasePrice) * 2);
 
-        // Passo 9: Adicionar mais 5% ao wholesale e recalcular
-        const tableSix = tableFive * 0.90;
+        // Passo 9: tableFive - 10% e setar em tableSix
+        const tableSix = Math.ceil(tableFive * 0.90);
 
         // Atualizar o estado com todos os valores calculados
         setFormData(prevData => ({
-            ...prevData,
-            tableOne: tableOne.toFixed(2),  // Definir até 2 casas decimais
-            averagePrice: averagePrice.toFixed(2),
-            costPrice: costPrice.toFixed(2),
-            costPriceWithFreight: costPriceWithFreight.toFixed(2),
-            tableTwo: Math.ceil(tableTwo).toFixed(2),
-            tableThree: Math.ceil(tableThree).toFixed(2),
-            tableFour: Math.ceil(tableFour).toFixed(2),
-            tableFive: Math.ceil(tableFive).toFixed(2),
-            tableSix: Math.ceil(tableSix).toFixed(2),
-        }));
+        ...prevData,
+        tableOne: tableOne.toFixed(2),
+        averagePrice: averagePrice.toFixed(2),
+        costPrice: costPrice.toFixed(2),
+        costPriceWithFreight: costPriceWithFreight.toFixed(2),
+        tableTwo: Math.ceil(tableTwo).toFixed(2),
+        tableThree: Math.ceil(tableThree).toFixed(2),
+        tableFour: Math.ceil(tableFour).toFixed(2),
+        tableFive: tableFive.toFixed(2),
+        tableSix: tableSix.toFixed(2),
+    }));
     }
   
   return (
